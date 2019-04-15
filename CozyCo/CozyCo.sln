@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozyCo", "CozyCo\CozyCo.csproj", "{672938DA-DE13-4337-B99E-3B7F670067E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozyCo.Models", "CozyCo.Models\CozyCo.Models.csproj", "{FA1C894B-671F-4646-AB95-D74376EF8C3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozyCo.Model", "CozyCo.Models\CozyCo.Model.csproj", "{FA1C894B-671F-4646-AB95-D74376EF8C3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
