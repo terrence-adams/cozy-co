@@ -1,0 +1,51 @@
+﻿@*Model type definition*@
+@model List<Property>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    table, th, td {
+        border: 2px solid black;
+    }
+</style>
+
+<h1> List of Properties</h1>
+
+<table class="table">
+    <tr>
+        <th> Address </th>
+        <th> Address 2</th>
+        <th> City </th>
+        <th> Zipcode </th>
+        <th> Image </th>
+
+    </tr>
+    @*Use uppercase Model when implementing*@
+    @*Loop for displaying the items in the collection*@
+
+    @foreach (var property in Model)
+    {
+        <tr>
+
+            <td>@property.Address</td>
+            <td>@property.Address2</td>
+            <td>@property.City</td>
+            <td>@property.Zipcode</td>
+            <td>@property.Image</td>
+
+        </tr>
+
+
+    }
+
+    @if (Model.Count == 0)
+    {
+        <tr colspan="4">
+            <td> You don't have any properties to display. <a href="/property/add"> Add a Property</a></td>
+        </tr>
+    }
+
+
+</table>
