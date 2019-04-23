@@ -4,12 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CozyCo.Models;
+using System.Linq;
 
 namespace CozyCo.WebUI.Controllers
 {
     public class PropertyController : Controller
     {
-        private List<Property> Properties = new List<Property>();
+        private List<Property> Properties = new List<Property>
+        {
+            new Property {ID = 1, Address ="1234 Main Street", Address2 = "Suite D", City="Austin", Zipcode="34523"},
+            new Property {ID = 2,Address="2344 Wilkerson",Address2="Drive Two",City="Houston",Zipcode="23234"}
+
+        };
         public IActionResult Index()
         {
             return View(Properties); //passing in the model type
@@ -30,6 +36,20 @@ namespace CozyCo.WebUI.Controllers
             return View(nameof(Index), Properties); //we're calling the page and passing the collection
 
 
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var property = Properties.Single(p => p.ID == id);
+            Properties.Remove(property);
+            return View(nameof(Index), Properties);
+
+        }
+
+        public IActionResult Detail(int id)
+        {
+            var property = Properties.Single(p => p.ID == id);
+            return View(property);
         }
     }
 }
