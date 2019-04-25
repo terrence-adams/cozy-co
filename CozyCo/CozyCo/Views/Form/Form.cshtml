@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Form";
+}
+
+<h1>Form</h1>
+
+@{
+
+    var action = Model == null ? "Add" : "Edit";
+
+
+}
+
+
+<form asp-action="@action" asp-controller="property" method="post">
+    <div asp-validation-summary="All">
+        <div>
+
+
+
+        </div>
+
+    </div>
+
+
+</form>
+

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 
-namespace CozyCo.Models
+namespace CozyCo.Domain.Models
 {
     //Residental properties
     public class Property

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using CozyCo.Models;
+using CozyCo.Domain.Models;
 using System.Linq;
 
 namespace CozyCo.WebUI.Controllers
@@ -30,10 +30,17 @@ namespace CozyCo.WebUI.Controllers
         [HttpPost]
         public IActionResult Add(Property newProperty)
         {
-            Properties.Add(newProperty); //adds the passed in values as instance of the class
+            if (ModelState.IsValid)
+            {
+
+                Properties.Add(newProperty);
+                return View(nameof(Index), Properties);
+
+            }
+            //adds the passed in values as instance of the class
             //return RedirectToAction(nameof(Index)); //runs at time of compiling because it may be dynamic
 
-            return View(nameof(Index), Properties); //we're calling the page and passing the collection
+            return View("Form", newProperty); //we're calling the page and passing the collection
 
 
         }
@@ -51,5 +58,17 @@ namespace CozyCo.WebUI.Controllers
             var property = Properties.Single(p => p.ID == id);
             return View(property);
         }
+
+        [HttpPost]
+        public IActionResult Edit(int iD)
+        {
+
+            var myProperty = Properties.Single(p => p.ID == iD);
+
+            return View(nameof(Index), Properties);
+
+        }
+
+
     }
 }
