@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CozyCo.Models\CozyCo.Domain.csproj" />
-    <ProjectReference Include="..\CozyCo\CozyCo.WebUI.csproj" />
   </ItemGroup>
 
 </Project>
