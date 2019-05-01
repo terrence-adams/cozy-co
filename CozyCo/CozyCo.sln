@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozyCo.WebUI", "CozyCo\CozyCo.WebUI.csproj", "{672938DA-DE13-4337-B99E-3B7F670067E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozyCo.Models", "CozyCo.Models\CozyCo.Models.csproj", "{FA1C894B-671F-4646-AB95-D74376EF8C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozyCo.Domain", "CozyCo.Models\CozyCo.Domain.csproj", "{FA1C894B-671F-4646-AB95-D74376EF8C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozyCo.Data", "CozyCo.Data\CozyCo.Data.csproj", "{D1F98052-29F5-4D04-B9A7-53421B2FF2B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FA1C894B-671F-4646-AB95-D74376EF8C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA1C894B-671F-4646-AB95-D74376EF8C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA1C894B-671F-4646-AB95-D74376EF8C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F98052-29F5-4D04-B9A7-53421B2FF2B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F98052-29F5-4D04-B9A7-53421B2FF2B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F98052-29F5-4D04-B9A7-53421B2FF2B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F98052-29F5-4D04-B9A7-53421B2FF2B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
