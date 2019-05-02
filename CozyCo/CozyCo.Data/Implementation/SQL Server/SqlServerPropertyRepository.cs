@@ -13,7 +13,13 @@ namespace CozyCo.Data.Implementation.SQL_Server
     {
         public Property Create(Property newProperty)
         {
-            throw new NotImplementedException();
+            using (var context = new CozyCoDbContext())
+            {
+                context.Properties.Add(newProperty);
+                context.SaveChanges();
+            }
+
+            return newProperty; //ID property will be populated - this is a reference to the original
         }
 
         public bool Delete(int id)
@@ -22,10 +28,11 @@ namespace CozyCo.Data.Implementation.SQL_Server
             using (var context = new CozyCoDbContext())
             {
                 Property propertyDeleted;
-                propertyDeleted = context.Properties.Find(id);
+                propertyDeleted = GetById(id);
                 context.Properties.Remove(propertyDeleted);
+                context.SaveChanges();
                 propertyDeleted = context.Properties.Find(id);
-                if (propertyDeleted == null)
+                if (GetById(id) == null)
                 { deleted = true; }
 
             }
@@ -50,7 +57,15 @@ namespace CozyCo.Data.Implementation.SQL_Server
 
         public Property Update(Property updatedProperty)
         {
-            throw new NotImplementedException();
+            using (var context = new CozyCoDbContext())
+            {
+                var propertyUpdated = GetById(updatedProperty.ID);
+                context.Entry(propertyUpdated).CurrentValues
+                    .SetValues(updatedProperty);
+                context.SaveChanges();
+            }
+
+            return updatedProperty;
         }
     }
 }

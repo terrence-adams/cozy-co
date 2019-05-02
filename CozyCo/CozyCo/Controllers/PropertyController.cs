@@ -5,11 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CozyCo.Domain.Models;
 using System.Linq;
+using CozyCo.Service.Services;
 
 namespace CozyCo.WebUI.Controllers
 {
     public class PropertyController : Controller
     {
+        private readonly IPropertyService _propertyService;
+        public PropertyController(IPropertyService propertyService)
+        {
+            _propertyService = propertyService;
+        }
+
         private List<Property> Properties = new List<Property>
         {
             new Property {ID = 1, Address ="1234 Main Street", Address2 = "Suite D", City="Austin", Zipcode="34523"},
