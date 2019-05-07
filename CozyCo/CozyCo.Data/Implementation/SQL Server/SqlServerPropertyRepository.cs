@@ -22,6 +22,15 @@ namespace CozyCo.Data.Implementation.SQL_Server
             return newProperty; //ID property will be populated - this is a reference to the original
         }
 
+        public ICollection<Property> GetAllProperties()
+        {
+
+            using (var context = new CozyCoDbContext())
+            {
+                return context.Properties.ToList();
+            }
+
+        }
         public bool Delete(int id)
         {
             bool deleted = false;
@@ -62,6 +71,7 @@ namespace CozyCo.Data.Implementation.SQL_Server
                 var propertyUpdated = GetById(updatedProperty.ID);
                 context.Entry(propertyUpdated).CurrentValues
                     .SetValues(updatedProperty);
+                context.Properties.Update(updatedProperty);
                 context.SaveChanges();
             }
 

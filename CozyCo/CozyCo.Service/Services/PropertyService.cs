@@ -11,6 +11,8 @@ namespace CozyCo.Service.Services
         Property GetById(int id);
         // ICollection<Property> GetLandLordById(int landlordId);
 
+        ICollection<Property> GetAllProperties();
+
         //Create
         Property Create(Property newProperty);
 
@@ -58,6 +60,13 @@ namespace CozyCo.Service.Services
         public Property Update(Property updatedProperty)
         {
             return _propertyRepository.Update(updatedProperty);
+        }
+
+        public ICollection<Property> GetAllProperties()
+        {
+
+            return _propertyRepository.GetAllProperties();
+
         }
     }
 }

@@ -25,7 +25,8 @@ namespace CozyCo.WebUI.Controllers
         };
         public IActionResult Index()
         {
-            return View(Properties); //passing in the model type
+            var properties = _propertyService.GetAllProperties();//passing in the model type
+            return View(properties);
         }
 
         public IActionResult Add()
@@ -40,8 +41,8 @@ namespace CozyCo.WebUI.Controllers
             if (ModelState.IsValid)
             {
 
-                Properties.Add(newProperty);
-                return View(nameof(Index), Properties);
+                _propertyService.Create(newProperty);
+                return RedirectToAction(nameof(Index));
 
             }
             //adds the passed in values as instance of the class
@@ -54,6 +55,11 @@ namespace CozyCo.WebUI.Controllers
 
         public IActionResult Delete(int id)
         {
+            var succeeded = _propertyService.Delete(id);
+            if (succeeded)
+            {
+                ViewBag.Error = " This was not deleted successfully.";
+            }
             var property = Properties.Single(p => p.ID == id);
             Properties.Remove(property);
             return View(nameof(Index), Properties);
@@ -66,13 +72,28 @@ namespace CozyCo.WebUI.Controllers
             return View(property);
         }
 
-        [HttpPost]
+
         public IActionResult Edit(int iD)
         {
+            var property = _propertyService.GetById(iD);
 
-            var myProperty = Properties.Single(p => p.ID == iD);
 
-            return View(nameof(Index), Properties);
+            return View("Form", property);
+
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Property newProperty)
+        {
+            if (ModelState.IsValid)
+            {
+                _propertyService.Update(newProperty);
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            return View("Form", newProperty);
+
 
         }
 
