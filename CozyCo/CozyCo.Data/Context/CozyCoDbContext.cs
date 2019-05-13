@@ -6,6 +6,7 @@ using CozyCo.Domain;
 using CozyCo.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CozyCo.Data.Context
 {
     //This class will translate Models into Database tables
@@ -13,6 +14,7 @@ namespace CozyCo.Data.Context
     {
         //Per Model as table - add as dbset
         public DbSet<Property> Properties { get; set; }
+        public DbSet<PropertyType> PropertyTypes { get; set; }
 
 
 
@@ -23,6 +25,16 @@ namespace CozyCo.Data.Context
             string connectionString = @"Server=(localdb)\mssqllocaldb;Database=cozyco;Trusted_Connection=true;";
 
             optionsBuilder.UseSqlServer(connectionString);
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PropertyType>().HasData(
+                new PropertyType { Id = 1, Description = "Condo" },
+                new PropertyType { Id = 2, Description = "Single Family Home" },
+                new PropertyType { Id = 3, Description = "Duplex" }
+                );
         }
     }
 

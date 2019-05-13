@@ -17,9 +17,10 @@ namespace CozyCo.Data.Implementation.SQL_Server
             {
                 context.Properties.Add(newProperty);
                 context.SaveChanges();
+                return newProperty;
             }
 
-            return newProperty; //ID property will be populated - this is a reference to the original
+            //ID property will be populated - this is a reference to the original
         }
 
         public ICollection<Property> GetAllProperties()
@@ -44,9 +45,11 @@ namespace CozyCo.Data.Implementation.SQL_Server
                 if (GetById(id) == null)
                 { deleted = true; }
 
+                return deleted;
+
             }
 
-            return deleted;
+
         }
 
         public Property GetById(int id)
@@ -58,9 +61,10 @@ namespace CozyCo.Data.Implementation.SQL_Server
                 //represents the tables in the context : SQL
                 propertyFound = context.Properties.Find(id);
                 //context.Properties.Single(p => p.ID == id);
+                return propertyFound;
             }
 
-            return propertyFound;
+
 
         }
 
@@ -73,9 +77,10 @@ namespace CozyCo.Data.Implementation.SQL_Server
                     .SetValues(updatedProperty);
                 context.Properties.Update(updatedProperty);
                 context.SaveChanges();
+                return updatedProperty;
             }
 
-            return updatedProperty;
+
         }
     }
 }

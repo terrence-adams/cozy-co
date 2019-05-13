@@ -32,7 +32,7 @@ namespace CozyCo.WebUI.Controllers
         public IActionResult Add()
         {
 
-            return View();
+            return View("Form");
 
         }
         [HttpPost]
@@ -48,7 +48,7 @@ namespace CozyCo.WebUI.Controllers
             //adds the passed in values as instance of the class
             //return RedirectToAction(nameof(Index)); //runs at time of compiling because it may be dynamic
 
-            return View("Form", newProperty); //we're calling the page and passing the collection
+            return View("Form"); //we're calling the page and passing the collection
 
 
         }
@@ -56,13 +56,11 @@ namespace CozyCo.WebUI.Controllers
         public IActionResult Delete(int id)
         {
             var succeeded = _propertyService.Delete(id);
-            if (succeeded)
+            if (!succeeded)
             {
                 ViewBag.Error = " This was not deleted successfully.";
             }
-            var property = Properties.Single(p => p.ID == id);
-            Properties.Remove(property);
-            return View(nameof(Index), Properties);
+            return RedirectToAction(nameof(Index));
 
         }
 
