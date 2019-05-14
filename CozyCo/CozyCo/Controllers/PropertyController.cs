@@ -12,9 +12,13 @@ namespace CozyCo.WebUI.Controllers
     public class PropertyController : Controller
     {
         private readonly IPropertyService _propertyService;
-        public PropertyController(IPropertyService propertyService)
+        private readonly IPropertyTypeService _propertyTypeService;
+        private readonly string PROPERTYTYPES = "PropertyTypes";
+
+        public PropertyController(IPropertyService propertyService, IPropertyTypeService propertyTypeService)
         {
             _propertyService = propertyService;
+            _propertyTypeService = propertyTypeService;
         }
 
         private List<Property> Properties = new List<Property>
@@ -31,6 +35,8 @@ namespace CozyCo.WebUI.Controllers
 
         public IActionResult Add()
         {
+            var propertytypes = _propertyTypeService.GetAll();
+            ViewData.Add(PROPERTYTYPES, propertytypes);
 
             return View("Form");
 
