@@ -8,14 +8,14 @@ namespace CozyCo.Service.Services
 {
     public interface IPropertyTypeService
     {
-        PropertyTypeService GetById(int id);
+        PropertyType GetById(int id);
         ICollection<PropertyType> GetAll();
     }
 
 
     public class PropertyTypeService : IPropertyTypeService
     {
-        IPropertyTypeRepository _propertyTypeRepository;
+        private readonly IPropertyTypeRepository _propertyTypeRepository;
 
         public PropertyTypeService(IPropertyTypeRepository propertyTypeRepo)
         {
@@ -27,7 +27,7 @@ namespace CozyCo.Service.Services
             return _propertyTypeRepository.GetAll();
         }
 
-        public PropertyTypeService GetById(int id)
+        public PropertyType GetById(int id)
         {
             return _propertyTypeRepository.GetById(id);
         }
