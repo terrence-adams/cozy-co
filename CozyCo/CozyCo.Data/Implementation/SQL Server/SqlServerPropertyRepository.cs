@@ -1,10 +1,7 @@
-﻿using CozyCo.Data.Interfaces;
+﻿using CozyCo.Data.Context;
+using CozyCo.Data.Interfaces;
 using CozyCo.Domain.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using CozyCo.Data;
-using CozyCo.Data.Context;
 using System.Linq;
 
 namespace CozyCo.Data.Implementation.SQL_Server
@@ -25,13 +22,12 @@ namespace CozyCo.Data.Implementation.SQL_Server
 
         public ICollection<Property> GetAllProperties()
         {
-
             using (var context = new CozyCoDbContext())
             {
                 return context.Properties.ToList();
             }
-
         }
+
         public bool Delete(int id)
         {
             bool deleted = false;
@@ -46,10 +42,7 @@ namespace CozyCo.Data.Implementation.SQL_Server
                 { deleted = true; }
 
                 return deleted;
-
             }
-
-
         }
 
         public Property GetById(int id)
@@ -63,9 +56,6 @@ namespace CozyCo.Data.Implementation.SQL_Server
                 //context.Properties.Single(p => p.ID == id);
                 return propertyFound;
             }
-
-
-
         }
 
         public Property Update(Property updatedProperty)
@@ -79,8 +69,6 @@ namespace CozyCo.Data.Implementation.SQL_Server
                 context.SaveChanges();
                 return updatedProperty;
             }
-
-
         }
     }
 }

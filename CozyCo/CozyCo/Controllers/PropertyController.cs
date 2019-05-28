@@ -1,10 +1,8 @@
-﻿using System;
+﻿using CozyCo.Domain.Models;
+using CozyCo.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using CozyCo.Domain.Models;
-using CozyCo.Service.Services;
 
 namespace CozyCo.WebUI.Controllers
 {
@@ -24,8 +22,8 @@ namespace CozyCo.WebUI.Controllers
         {
             new Property {ID = 1, Address ="1234 Main Street", Address2 = "Suite D", City="Austin", Zipcode="34523"},
             new Property {ID = 2,Address="2344 Wilkerson",Address2="Drive Two",City="Houston",Zipcode="23234"}
-
         };
+
         public IActionResult Index()
         {
             if (TempData["Error"] != null)
@@ -42,7 +40,6 @@ namespace CozyCo.WebUI.Controllers
         {
             GetPropertyTypes();
             return View("Form");
-
         }
 
         private void GetPropertyTypes()
@@ -56,17 +53,13 @@ namespace CozyCo.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 _propertyService.Create(newProperty);
                 return RedirectToAction(nameof(Index));
-
             }
             //adds the passed in values as instance of the class
             //return RedirectToAction(nameof(Index)); //runs at time of compiling because it may be dynamic
 
             return View("Form"); //we're calling the page and passing the collection
-
-
         }
 
         public IActionResult Delete(int id)
@@ -77,7 +70,6 @@ namespace CozyCo.WebUI.Controllers
                 TempData.Add("Error", " This was not deleted successfully.");
             }
             return RedirectToAction(nameof(Index));
-
         }
 
         public IActionResult Detail(int id)
@@ -86,14 +78,11 @@ namespace CozyCo.WebUI.Controllers
             return View(property);
         }
 
-
         public IActionResult Edit(int iD)
         {
             var property = _propertyService.GetById(iD);
 
-
             return View("Form", property);
-
         }
 
         [HttpPost]
@@ -103,14 +92,9 @@ namespace CozyCo.WebUI.Controllers
             {
                 _propertyService.Update(newProperty);
                 return RedirectToAction(nameof(Index));
-
             }
 
             return View("Form", newProperty);
-
-
         }
-
-
     }
 }

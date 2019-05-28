@@ -1,10 +1,8 @@
 ﻿using CozyCo.Data.Context;
 using CozyCo.Data.Interfaces;
 using CozyCo.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CozyCo.Data.Implementation.SQL_Server
 {
@@ -24,8 +22,6 @@ namespace CozyCo.Data.Implementation.SQL_Server
             {
                 return context.PropertyTypes.SingleOrDefault(pt => pt.Id == id);
             }
-
-
         }
     }
 }

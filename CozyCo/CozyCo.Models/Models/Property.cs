@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CozyCo.Domain.Models
 {
@@ -10,8 +6,10 @@ namespace CozyCo.Domain.Models
     public class Property
     {
         public int ID { get; set; }
+
         [MaxLength(100)]
         public string Address { get; set; }
+
         [Display(Name = "Address Continuation.")]
         public string Address2 { get; set; }
 
@@ -30,6 +28,5 @@ namespace CozyCo.Domain.Models
         public string AppUserId { get; set; }
 
         public AppUser Landlord { get; set; }
-
     }
 }

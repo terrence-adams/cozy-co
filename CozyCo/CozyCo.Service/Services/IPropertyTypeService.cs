@@ -1,17 +1,13 @@
-﻿using CozyCo.Data.Interfaces;
-using CozyCo.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CozyCo.Service.Services
 {
     public interface IPropertyTypeService
     {
         PropertyType GetById(int id);
+
         ICollection<PropertyType> GetAll();
     }
-
 
     public class PropertyTypeService : IPropertyTypeService
     {
@@ -19,9 +15,9 @@ namespace CozyCo.Service.Services
 
         public PropertyTypeService(IPropertyTypeRepository propertyTypeRepo)
         {
-
             _propertyTypeRepository = propertyTypeRepo;
         }
+
         public ICollection<PropertyType> GetAll()
         {
             return _propertyTypeRepository.GetAll();

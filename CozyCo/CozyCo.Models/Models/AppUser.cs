@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace CozyCo.Domain.Models
 {
@@ -10,6 +7,5 @@ namespace CozyCo.Domain.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
     }
 }

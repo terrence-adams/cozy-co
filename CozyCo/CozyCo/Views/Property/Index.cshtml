@@ -1,7 +1,6 @@
 ﻿@*Model type definition*@
 @model ICollection<Property>
 
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -33,7 +32,6 @@
         <th> City </th>
         <th> Zipcode </th>
         <th></th>
-
     </tr>
     @*Use uppercase Model when implementing*@
     @*Loop for displaying the items in the collection*@
@@ -49,9 +47,7 @@
                 <a asp-controller="property" asp-action="detail" asp-route-id="@property.ID"> Detail</a> |
                 <a href="#" class="js-open-modal" data-property-id="@property.ID"> Delete</a>
             </td>
-
         </tr>
-
 
     }
 
@@ -61,12 +57,7 @@
             <td> You don't have any properties to display. <a href="/property/add"> Add a Property</a></td>
         </tr>
     }
-
-
 </table>
-
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="delete-confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,8 +78,6 @@
         </div>
     </div>
 </div>
-
-
 
 @section Scripts
     {

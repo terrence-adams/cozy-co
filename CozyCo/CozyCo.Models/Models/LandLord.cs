@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CozyCo.Domain.Models
+﻿namespace CozyCo.Domain.Models
 {
-    class LandLord
+    internal class LandLord
     {
         public int Id { get; set; }
     }

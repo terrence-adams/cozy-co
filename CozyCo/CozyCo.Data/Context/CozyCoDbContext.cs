@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using CozyCo.Domain;
-using CozyCo.Domain.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using CozyCo.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace CozyCo.Data.Context
 {
@@ -14,9 +9,8 @@ namespace CozyCo.Data.Context
     {
         //Per Model as table - add as dbset
         public DbSet<Property> Properties { get; set; }
+
         public DbSet<PropertyType> PropertyTypes { get; set; }
-
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,10 +21,8 @@ namespace CozyCo.Data.Context
             optionsBuilder.UseSqlServer(connectionString);
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<PropertyType>().HasData(
                 new PropertyType { Id = 1, Description = "Condo" },
@@ -39,6 +31,4 @@ namespace CozyCo.Data.Context
                 );
         }
     }
-
-
 }

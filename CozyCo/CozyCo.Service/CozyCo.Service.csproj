@@ -9,8 +9,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CozyCo.Data\CozyCo.Data.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -10,9 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozyCo.Data", "CozyCo.Data\CozyCo.Data.csproj", "{D1F98052-29F5-4D04-B9A7-53421B2FF2B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CozyCo.Service", "CozyCo.Service\CozyCo.Service.csproj", "{6FD1DCF3-49D1-41A0-9B8F-AD235A487A10}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FA1C894B-671F-4646-AB95-D74376EF8C3A} = {FA1C894B-671F-4646-AB95-D74376EF8C3A}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

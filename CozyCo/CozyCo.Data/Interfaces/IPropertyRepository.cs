@@ -1,7 +1,4 @@
 ﻿using CozyCo.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CozyCo.Data.Interfaces
 {
@@ -9,11 +6,11 @@ namespace CozyCo.Data.Interfaces
     {
         //Read
         Property GetById(int id);
+
         // ICollection<Property> GetLandLordById(int landlordId);
 
         //Create
         Property Create(Property newProperty);
-
 
         //Update
 
@@ -21,6 +18,5 @@ namespace CozyCo.Data.Interfaces
 
         //Delete
         bool Delete(int id);
-
     }
 }

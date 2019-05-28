@@ -1,5 +1,3 @@
-using System;
-
 namespace CozyCo.Domain.Models
 {
     public class ErrorViewModel

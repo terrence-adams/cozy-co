@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CozyCo.Data.Context;
 using CozyCo.Data.Implementation.SQL_Server;
 using CozyCo.Data.Interfaces;
+using CozyCo.Domain.Models;
 using CozyCo.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,29 +32,29 @@ namespace CozyCo
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<CozyCoDbContext>();
+
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<CozyCoDbContext>();
+
             AddServiceImplementation(services);
             AddRepositoryImplementation(services);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
-
 
         private void AddRepositoryImplementation(IServiceCollection services)
         {
             services.AddSingleton<IPropertyRepository, SqlServerPropertyRepository>();
 
             services.AddSingleton<IPropertyTypeRepository, SqlServerPropertyTypeRepository>();
-
         }
-
 
         private void AddServiceImplementation(IServiceCollection services)
         {
-
             services.AddSingleton<IPropertyService, PropertyService>();
             services.AddSingleton<IPropertyTypeService, PropertyTypeService>();
-
-
         }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

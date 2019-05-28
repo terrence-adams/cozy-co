@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Form";
 }
 
@@ -10,20 +9,11 @@
     var action = Model == null ? "Add" : "Edit";
     var propertyTypes = ViewData["PropertyTypes"];
 
-
 }
-
 
 <form asp-action="@action" asp-controller="property" method="post">
     <div asp-validation-summary="All">
         <div>
-
-
-
         </div>
-
     </div>
-
-
 </form>
-
