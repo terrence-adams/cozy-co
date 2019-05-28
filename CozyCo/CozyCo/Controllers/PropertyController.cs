@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CozyCo.Domain.Models;
-using System.Linq;
 using CozyCo.Service.Services;
 
 namespace CozyCo.WebUI.Controllers
@@ -29,18 +28,29 @@ namespace CozyCo.WebUI.Controllers
         };
         public IActionResult Index()
         {
+            if (TempData["Error"] != null)
+            {
+                ViewData.Add("Error", TempData["Error"]);
+            }
+
             var properties = _propertyService.GetAllProperties();//passing in the model type
             return View(properties);
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
-            var propertytypes = _propertyTypeService.GetAll();
-            ViewData.Add(PROPERTYTYPES, propertytypes);
-
+            GetPropertyTypes();
             return View("Form");
 
         }
+
+        private void GetPropertyTypes()
+        {
+            var property = _propertyService.GetAllProperties();
+            ViewData.Add(PROPERTYTYPES, property);
+        }
+
         [HttpPost]
         public IActionResult Add(Property newProperty)
         {
@@ -64,7 +74,7 @@ namespace CozyCo.WebUI.Controllers
             var succeeded = _propertyService.Delete(id);
             if (!succeeded)
             {
-                ViewBag.Error = " This was not deleted successfully.";
+                TempData.Add("Error", " This was not deleted successfully.");
             }
             return RedirectToAction(nameof(Index));
 

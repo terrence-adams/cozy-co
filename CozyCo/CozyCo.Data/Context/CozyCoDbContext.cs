@@ -5,12 +5,12 @@ using System.Text;
 using CozyCo.Domain;
 using CozyCo.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CozyCo.Data.Context
 {
     //This class will translate Models into Database tables
-    public class CozyCoDbContext : DbContext
+    public class CozyCoDbContext : IdentityDbContext<AppUser>
     {
         //Per Model as table - add as dbset
         public DbSet<Property> Properties { get; set; }
@@ -30,6 +30,8 @@ namespace CozyCo.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<PropertyType>().HasData(
                 new PropertyType { Id = 1, Description = "Condo" },
                 new PropertyType { Id = 2, Description = "Single Family Home" },

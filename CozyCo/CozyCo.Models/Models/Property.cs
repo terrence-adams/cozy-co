@@ -27,5 +27,9 @@ namespace CozyCo.Domain.Models
 
         public PropertyType PropertyType { get; set; }
 
+        public string AppUserId { get; set; }
+
+        public AppUser Landlord { get; set; }
+
     }
 }
