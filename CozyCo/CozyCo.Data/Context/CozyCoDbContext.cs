@@ -1,6 +1,8 @@
 ﻿using CozyCo.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace CozyCo.Data.Context
 {
@@ -11,6 +13,8 @@ namespace CozyCo.Data.Context
         public DbSet<Property> Properties { get; set; }
 
         public DbSet<PropertyType> PropertyTypes { get; set; }
+
+        public DbSet<Lease> Leases { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +33,22 @@ namespace CozyCo.Data.Context
                 new PropertyType { Id = 2, Description = "Single Family Home" },
                 new PropertyType { Id = 3, Description = "Duplex" }
                 );
+
+
+            modelBuilder.Entity<Lease>()
+                .HasKey(l => new { l.PropertyId, l.TenantId });
+
+            modelBuilder.Entity<Lease>()
+            .HasOne(l => l.Tenant)
+            .WithMany(t => t.Leases)
+            .HasForeignKey(l => l.TenantId);
+
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Tenant", NormalizedName = "Tenant" },
+                new IdentityRole { Name = "Landlord", NormalizedName = "LANDLORD" }
+                );
+
         }
     }
 }

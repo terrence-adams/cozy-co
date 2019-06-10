@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CozyCo.WebUI.Models
 {
@@ -11,7 +13,11 @@ namespace CozyCo.WebUI.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password), Required]
-        [Compare("Password", ErrorMessage = "Make sure your passwords match.")]
+        [Compare(nameof(Password), ErrorMessage = "Make sure your passwords match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Role { get; set; }
+
+        public List<IdentityRole> Roles { get; set; }
     }
 }

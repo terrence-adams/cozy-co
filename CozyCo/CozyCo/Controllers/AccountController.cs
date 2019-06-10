@@ -2,6 +2,7 @@
 using CozyCo.WebUI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CozyCo.WebUI.Controllers
@@ -12,16 +13,26 @@ namespace CozyCo.WebUI.Controllers
 
         private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
         public IActionResult Register()
         {
             RedirectUserWhenAlreadyLoggedIn();
+
+            var roles = _roleManager.Roles.ToList();
+            var vm = new RegisterViewModel()
+
+            {
+                Roles = roles
+            };
             return View();
         }
 
@@ -87,7 +98,7 @@ namespace CozyCo.WebUI.Controllers
                 }
             }
 
-            return View();
+            return View(lvm);
         }
 
         public async Task<IActionResult> Logout()

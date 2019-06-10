@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CozyCo.Domain.Models
 {
@@ -28,5 +29,7 @@ namespace CozyCo.Domain.Models
         public string AppUserId { get; set; }
 
         public AppUser Landlord { get; set; }
+
+        public ICollection<Lease> Leases { get; set; }
     }
 }

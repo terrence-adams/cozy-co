@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using CozyCo.Data;
+using CozyCo.Data.Interfaces;
+using CozyCo.Domain;
+using CozyCo.Domain.Models;
 
 namespace CozyCo.Service.Services
 {
