@@ -4,14 +4,16 @@ using CozyCo.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CozyCo.Data.Migrations
 {
     [DbContext(typeof(CozyCoDbContext))]
-    partial class CozyCoDbContentModelSnapshot : ModelSnapshot
+    [Migration("20190610041542_IdentityRoles")]
+    partial class IdentityRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

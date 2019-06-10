@@ -1,4 +1,5 @@
 ﻿using CozyCo.Domain.Models;
+using System.Collections.Generic;
 
 namespace CozyCo.Data.Interfaces
 {
@@ -6,6 +7,7 @@ namespace CozyCo.Data.Interfaces
     {
         //Read
         Property GetById(int id);
+        ICollection<Property> GetAllPropertiesByUserId(string userId);
 
         // ICollection<Property> GetLandLordById(int landlordId);
 

@@ -1,21 +1,26 @@
 ﻿using CozyCo.Domain.Models;
 using CozyCo.Service.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CozyCo.WebUI.Controllers
 {
+    [Authorize(Roles = "Landlord")]
     public class PropertyController : Controller
     {
         private readonly IPropertyService _propertyService;
         private readonly IPropertyTypeService _propertyTypeService;
+        private readonly UserManager<AppUser> _userManager;
         private readonly string PROPERTYTYPES = "PropertyTypes";
 
-        public PropertyController(IPropertyService propertyService, IPropertyTypeService propertyTypeService)
+        public PropertyController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, UserManager<AppUser> userManager)
         {
             _propertyService = propertyService;
             _propertyTypeService = propertyTypeService;
+            _userManager = userManager;
         }
 
         private List<Property> Properties = new List<Property>
@@ -31,7 +36,8 @@ namespace CozyCo.WebUI.Controllers
                 ViewData.Add("Error", TempData["Error"]);
             }
 
-            var properties = _propertyService.GetAllProperties();//passing in the model type
+            var userId = _userManager.GetUserId(User);
+            var properties = _propertyService.GetAllPropertiesByUserId(userId);//passing in the model type
             return View(properties);
         }
 
@@ -44,7 +50,8 @@ namespace CozyCo.WebUI.Controllers
 
         private void GetPropertyTypes()
         {
-            var property = _propertyService.GetAllProperties();
+            string Id = "0";
+            var property = _propertyService.GetAllPropertiesByUserId(Id); // need to update service and add new method
             ViewData.Add(PROPERTYTYPES, property);
         }
 
@@ -53,6 +60,7 @@ namespace CozyCo.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                newProperty.AppUserId = _userManager.GetUserId(User);
                 _propertyService.Create(newProperty);
                 return RedirectToAction(nameof(Index));
             }
@@ -72,6 +80,7 @@ namespace CozyCo.WebUI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Landlord, Tenant")]
         public IActionResult Detail(int id)
         {
             var property = Properties.Single(p => p.ID == id);

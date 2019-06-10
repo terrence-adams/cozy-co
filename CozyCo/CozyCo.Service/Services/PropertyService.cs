@@ -10,7 +10,7 @@ namespace CozyCo.Service.Services
 
         // ICollection<Property> GetLandLordById(int landlordId);
 
-        ICollection<Property> GetAllProperties();
+        ICollection<Property> GetAllPropertiesByUserId(string userId);
 
         //Create
         Property Create(Property newProperty);
@@ -21,6 +21,7 @@ namespace CozyCo.Service.Services
 
         //Delete
         bool Delete(int id);
+
     }
 
     public class PropertyService : IPropertyService
@@ -52,9 +53,9 @@ namespace CozyCo.Service.Services
             return _propertyRepository.Update(updatedProperty);
         }
 
-        public ICollection<Property> GetAllProperties()
+        public ICollection<Property> GetAllPropertiesByUserId(string userId)
         {
-            return _propertyRepository.GetAllProperties();
+            return _propertyRepository.GetAllPropertiesByUserId(userId);
         }
     }
 }

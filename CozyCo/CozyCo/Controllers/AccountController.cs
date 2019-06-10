@@ -53,22 +53,34 @@ namespace CozyCo.WebUI.Controllers
 
                 if (result.Succeeded)
                 {
-                    // new user got created
-                    // we can login the user
-                    await _signInManager.SignInAsync(newUser, false);
-                    // send the user to the right page (redirect)
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    // new user was not added
-                    foreach (var error in result.Errors)
+                    result = await _userManager.CreateAsync(newUser, registerVM.Password);
+
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", error.Description);
+                        await _signInManager.SignInAsync(newUser, false);
+
+                        if (registerVM.Role == "Landlord")
+                        {
+                            return RedirectToAction("Index", "Landlord");
+                        }
+
+                        return RedirectToAction("Index", "Tenant");
                     }
+                    else
+                    {
+                        // new user was not added
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
+
                 }
+
             }
 
+            var roles = _roleManager.Roles.ToList();
+            registerVM.Roles = roles;
             // sending back the error(s) to the view (register form)
             return View(registerVM);
         }
